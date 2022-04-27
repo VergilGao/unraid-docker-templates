@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>DontStarveTogether</Name>
+  <Repository>ghcr.io/vergilgao/steamcmd-dontstarve-server</Repository>
+  <Registry>https://github.com/VergilGao/docker-steamcmd-server/pkgs/container/steamcmd-dontstarve-server</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/VergilGao/docker-steamcmd-server</Support>
+  <Project>https://www.klei.com/games/dont-starve-together</Project>
+  <Overview>This Docker will download and install SteamCMD. It will also install Don't Starve Together and run it.&#xD;
+&#xD;
+ATTENTION: You can download basic server config files from https://accounts.klei.com/account/game/servers?game=DontStarveTogether. &#xD;
+After the first complete startup (you can see it in the log) copy your cluster configs in the 'token/CLUSTER_NAME' folder and restart the container(The CLUSTER_NAME is defined by yourself).&#xD;
+First Startup can take very long since it downloads the gameserver files!&#xD;
+
+&#xD;
+Update Notice: Simply restart the container if a newer version of the game is available.&#xD;
+&#xD;
+You can also run multiple servers with only one SteamCMD directory!</Overview>
+  <Category>GameServers:</Category>
+  <WebUI/>
+  <TemplateURL>false</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/VergilGao/unraid-docker-templates/master/catfight360.com/img/dontstarve.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This Docker will download and install SteamCMD. It will also install Don't Starve Together and run it.&#xD;
+&#xD;
+ATTENTION: You can download basic server config files from https://accounts.klei.com/account/game/servers?game=DontStarveTogether. &#xD;
+After the first complete startup (you can see it in the log) copy your cluster configs in the 'token/CLUSTER_NAME' folder and restart the container(The CLUSTER_NAME is defined by yourself).&#xD;
+First Startup can take very long since it downloads the gameserver files!&#xD;
+
+&#xD;
+Update Notice: Simply restart the container if a newer version of the game is available.&#xD;
+&#xD;
+You can also run multiple servers with only one SteamCMD directory!</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/steamcmd</HostDir>
+      <ContainerDir>/serverdata/steamcmd</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/DontStarveTogether</HostDir>
+      <ContainerDir>/serverdata/serverfiles</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/DontStarveTogether/token</HostDir>
+      <ContainerDir>/serverdata/.klei/DoNotStarveTogether</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>Asia/Shanghai</Value>
+      <Name>TZ</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>343050</Value>
+      <Name>GAME_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>true</Value>
+      <Name>CAVES</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>cluster</Value>
+      <Name>CLUSTER_NAME</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>UID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="TimeZone" Target="TZ" Default="Asia/Shanghai" Mode="" Description="Container Variable: TZ" Type="Variable" Display="always" Required="true" Mask="false">Asia/Shanghai</Config>
+  <Config Name="SteamCMD" Target="/serverdata/steamcmd" Default="/mnt/user/appdata/steamcmd" Mode="rw" Description="You can share this path by multi game servers." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/steamcmd</Config>
+  <Config Name="ServerFiles" Target="/serverdata/serverfiles" Default="/mnt/user/appdata/DontStarveTogether" Mode="rw" Description="The game will be installed here." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/DontStarveTogether</Config>
+  <Config Name="GAME_ID" Target="GAME_ID" Default="343050" Mode="" Description="The GAME_ID that the container download at startup. If you want to install a static or beta version of the game change the value to: '343050 -beta YOURBRANCH' (without quotes, replace YOURBRANCH with the branch or version you want to install)." Type="Variable" Display="always" Required="true" Mask="false">343050</Config>
+  <Config Name="CAVES" Target="CAVES" Default="true" Mode="" Description="Delete 'true' if you don't want Caves on your Server." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Token" Target="/serverdata/.klei/DoNotStarveTogether" Default="/mnt/user/appdata/DontStarveTogether/token" Mode="rw" Description="Put your cluster configs in the CLUSTER_NAME subfolder." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/DontStarveTogether/token</Config>
+  <Config Name="ClusterName" Target="CLUSTER_NAME" Default="cluster" Mode="" Description="Your cluster name, must different with others." Type="Variable" Display="always" Required="true" Mask="false">cluster</Config>
+  <Config Name="UID" Target="UID" Default="99" Mode="" Description="Container Variable: UID" Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
+  <Config Name="GID" Target="GID" Default="100" Mode="" Description="Container Variable: GID" Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
+  <Config Name="DATA_PERM" Target="DATA_PERM" Default="770" Mode="" Description="Container Variable: DATA_PERM" Type="Variable" Display="advanced-hide" Required="true" Mask="false">770</Config>
+</Container>
